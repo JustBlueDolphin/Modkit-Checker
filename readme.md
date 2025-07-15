@@ -1,4 +1,4 @@
-Yes this was made by AI That i cant code for shit, dont complain that i dont care
+Yes this was made by AI, That i cant code for shit, dont complain that i dont care
 
 # Modkit, Siren, and Light ID Checker
 
