@@ -1,3 +1,5 @@
+Yes this was made by AI That i cant code for shit, dont complain that i dont care
+
 # Modkit, Siren, and Light ID Checker
 
 This Python script scans all `carcols.meta` files in your FiveM resource directory, extracts Modkit IDs, Siren IDs, and Light IDs, and lists them in a report. Duplicate Modkit IDs are shown at the top.
