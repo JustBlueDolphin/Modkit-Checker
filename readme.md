@@ -35,7 +35,7 @@ This Python script scans all `carcols.meta` files in your FiveM resource directo
 
 ## Dependencies
 
-- Python 3.7 or newer
+- [Python 3.7 or newer](https://www.python.org/downloads/)
 - No external libraries required (uses only Python standard library)
 
 ## Usage
