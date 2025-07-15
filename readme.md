@@ -9,6 +9,7 @@ This Python script scans all `carcols.meta` files in your FiveM resource directo
 - Finds all Light IDs (`<Lights>...<id value="..."/>...`)
 - Lists duplicate Modkit IDs and their resource folders
 - Outputs results in `modkits_report.txt` in the format:  
+  Example:
   ```
   DUPLICATE MODKIT IDs:
   ID 188: 4 times
