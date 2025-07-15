@@ -3,7 +3,8 @@ import os
 import re
 from collections import defaultdict
 
-root_dir = r'd:\Fivem Server\Blue-Box'
+#Change this to your root directory vehicle files are located | # e.g., 'C:/path/to/your/modkits'
+root_dir = r'ChangeThisToYourRootDirectory'
 output_file = 'modkits_report.txt'
 
 modkit_pattern = re.compile(r'<Kits>.*?<id\s+value="(\d+)"\s*/>', re.DOTALL)
