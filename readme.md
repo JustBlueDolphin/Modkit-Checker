@@ -41,12 +41,18 @@ This Python script scans all `carcols.meta` files in your FiveM resource directo
 ## Usage
 
 1. Place `check_modkits.py` in your main resource folder (e.g. `d:\Fivem Server\Blue-Box`)
-2. Open a terminal in VS Code or Command Prompt.
-3. Run the script:
+2. **To scan a different folder:**  
+   Edit the `root_dir` variable at the top of `check_modkits.py` and set it to your desired resource directory path.  
+   Example:  
+   ```python
+   root_dir = r"d:\Your\Custom\Resource\Folder"
+   ```
+3. Open a terminal in VS Code or Command Prompt.
+4. Run the script:
    ```
    python check_modkits.py
    ```
-4. View the results in `modkits_report.txt` in the same folder.
+5. View the results in `modkits_report.txt` in the same folder.
 
 ## Customization
 
