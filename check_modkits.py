@@ -27,7 +27,14 @@ for subdir, _, files in os.walk(root_dir):
     for file in files:
         if 'carcols' in file.lower():
             filepath = os.path.join(subdir, file)
+            # Get the folder name; if it's "data" or "common", use the parent folder instead
             folder = os.path.basename(os.path.dirname(filepath))
+            if folder.lower() in ('data', 'common'):
+                # climb one level up to get the folder before 'data'/'common'
+                parent_parent = os.path.dirname(os.path.dirname(filepath))
+                folder_before = os.path.basename(parent_parent)
+                if folder_before:  # fallback to original if something odd
+                    folder = folder_before
             print(f"Scanning: {filepath}")
             with open(filepath, encoding='utf-8', errors='ignore') as f:
                 content = f.read()
