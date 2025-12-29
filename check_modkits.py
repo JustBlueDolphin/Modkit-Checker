@@ -2,7 +2,6 @@
 import os
 import re
 from collections import defaultdict
-import time  # Import time module for sleep
 
 #Change this to your root directory vehicle files are located | # e.g., 'C:/path/to/your/modkits'
 root_dir = r'ChangeThisToYourRootDirectory'
@@ -97,8 +96,7 @@ for subdir, _, files in os.walk(root_dir):
                 # Print debug info if sirens or lights found
                 if sirens_found > 0 or lights_found > 0:
                     print(f"  -> Found {sirens_found} sirens and {lights_found} lights in {file}")
-            time.sleep(0.1)  # Increase delay to 0.1 seconds for slower scanning
-
+            
 # Prepare output
 dupes = {k: v for k, v in modkits.items() if len(v) > 1}
 uniques = {k: v for k, v in modkits.items() if len(v) == 1}
