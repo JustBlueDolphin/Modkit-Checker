@@ -5,18 +5,16 @@ from collections import defaultdict
 import time
 
 # Change this to your root directory vehicle files are located.
-root_dir = r'D:\Fivem Server\Blue-Box\txData\Qbox_B9A280.base\resources\[assets]'
+root_dir = r'ChangeThisToYourRootDirectory'
 output_dir = 'reports'
 
-# Multiple patterns for sirens - some files might have different structures.
-siren_pattern1 = re.compile(r'<Sirens>.*?<id\s+value="(\d+)"\s*/>', re.DOTALL)
-siren_pattern2 = re.compile(r'<Item\s+type="CSirenSetting">.*?<id\s+value="(\d+)"\s*/>', re.DOTALL)
-siren_pattern3 = re.compile(r'<Item>.*?<id\s+value="(\d+)"\s*/>', re.DOTALL)
-siren_pattern4 = re.compile(r'<CSirenSetting>.*?<id\s+value="(\d+)"\s*/>', re.DOTALL)
-
-# Patterns that capture both siren names and IDs.
+# Siren parsing is limited to Sirens sections or explicit CSirenSetting nodes
+# so light IDs and other Item IDs do not leak into siren reports.
+siren_block_pattern = re.compile(r'<Sirens>(.*?)</Sirens>', re.DOTALL)
 siren_with_name_pattern = re.compile(r'<Item[^>]*>.*?<name>([^<]+)</name>.*?<id\s+value="(\d+)"\s*/>.*?</Item>', re.DOTALL)
 siren_with_name_pattern2 = re.compile(r'<Item[^>]*>.*?<id\s+value="(\d+)"\s*/>.*?<name>([^<]+)</name>.*?</Item>', re.DOTALL)
+siren_item_id_pattern = re.compile(r'<Item[^>]*>.*?<id\s+value="(\d+)"\s*/>.*?</Item>', re.DOTALL)
+standalone_siren_pattern = re.compile(r'<CSirenSetting>.*?<id\s+value="(\d+)"\s*/>.*?</CSirenSetting>', re.DOTALL)
 
 item_pattern = re.compile(
     r'<Item>\s*<kitName>([^<]+)</kitName>\s*<id\s+value="(\d+)"\s*/>',
@@ -68,26 +66,47 @@ for subdir, _, files in os.walk(root_dir):
             modkit_id = match.group(2)
             modkits[modkit_id].append((kit_name, folder))
 
+        seen_siren_entries = set()
         siren_names_found = set()
-        for pattern in [siren_with_name_pattern, siren_with_name_pattern2]:
-            for match in pattern.finditer(content):
-                if pattern == siren_with_name_pattern:
-                    siren_name = match.group(1).strip()
-                    siren_id = match.group(2)
-                else:
-                    siren_id = match.group(1)
-                    siren_name = match.group(2).strip()
 
-                sirens[siren_id].append((folder, siren_name))
-                siren_names_found.add(siren_id)
+        for siren_block in siren_block_pattern.findall(content):
+            for pattern in [siren_with_name_pattern, siren_with_name_pattern2]:
+                for match in pattern.finditer(siren_block):
+                    if pattern == siren_with_name_pattern:
+                        siren_name = match.group(1).strip()
+                        siren_id = match.group(2)
+                    else:
+                        siren_id = match.group(1)
+                        siren_name = match.group(2).strip()
+
+                    entry = (siren_id, siren_name)
+                    if entry in seen_siren_entries:
+                        continue
+
+                    sirens[siren_id].append((folder, siren_name))
+                    siren_names_found.add(siren_id)
+                    seen_siren_entries.add(entry)
+                    sirens_found += 1
+
+            for match in siren_item_id_pattern.finditer(siren_block):
+                siren_id = match.group(1)
+                entry = (siren_id, 'Unknown')
+                if siren_id in siren_names_found or entry in seen_siren_entries:
+                    continue
+
+                sirens[siren_id].append((folder, 'Unknown'))
+                seen_siren_entries.add(entry)
                 sirens_found += 1
 
-        for pattern in [siren_pattern1, siren_pattern2, siren_pattern3, siren_pattern4]:
-            for match in pattern.finditer(content):
-                siren_id = match.group(1)
-                if siren_id not in siren_names_found:
-                    sirens[siren_id].append((folder, 'Unknown'))
-                    sirens_found += 1
+        for match in standalone_siren_pattern.finditer(content):
+            siren_id = match.group(1)
+            entry = (siren_id, 'Unknown')
+            if entry in seen_siren_entries or siren_id in siren_names_found:
+                continue
+
+            sirens[siren_id].append((folder, 'Unknown'))
+            seen_siren_entries.add(entry)
+            sirens_found += 1
 
         if sirens_found > 0:
             print(f'  -> Found {sirens_found} sirens in {file}')

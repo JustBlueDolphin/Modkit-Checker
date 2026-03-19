@@ -1,4 +1,7 @@
 modkits_report.txt
 /test
 /reports
-/reports
+reports/duplicate_siren_ids.txt
+reports/duplicate_modkit_ids.txt
+reports/all_siren_ids.txt
+reports/all_modkit_ids.txt

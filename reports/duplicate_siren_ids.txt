@@ -1,4 +1,93 @@
 DUPLICATE SIREN IDs
 ===================
 
-(no duplicate siren IDs found)
+ID 6816
+  - Folder: [gb_espertaems]
+  - Name: gbemsesperta
+  - Folder: [gb_steedems]
+  - Name: gbemsesperta
+
+ID 1603
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_os
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_os_suv
+
+ID 1605
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_retro_monar
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_os2
+
+ID 1607
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lbar_a1_v2
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lbar_caut
+
+ID 1609
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lbar_ems
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lbar_uk
+
+ID 1611
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lbar_doc
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_lpod_a1_v1
+
+ID 1613
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_os3
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_os3_suv
+
+ID 1615
+  - Folder: [gb_pol_main]
+  - Name: onx_pol_mdn3
+  - Folder: [gb_pol_main]
+  - Name: gbonx_pol_lbar_a1_v2
+
+ID 5003
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_os
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_os_suv
+
+ID 5005
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_retro_monar
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_os2
+
+ID 5007
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_a1_v2
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_caut
+
+ID 5009
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_ems
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_uk
+
+ID 5011
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_doc
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lpod_a1_v1
+
+ID 5013
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_os3
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_os3_suv
+
+ID 5015
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_mdn3
+  - Folder: onx-evp-a-shared
+  - Name: onx_pol_lbar_a1_v2
+
