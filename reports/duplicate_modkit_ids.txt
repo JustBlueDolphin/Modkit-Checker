@@ -1,9 +1,4 @@
 DUPLICATE MODKIT IDs
 ====================
 
-ID 775
-  - Kit Name: 775_gbsteedcrew_modkit
-  - Folder: [gb_steed]
-  - Kit Name: 775_gbsteedcrew_modkit
-  - Folder: [gb_steedems]
-
+(no duplicate modkit IDs found)

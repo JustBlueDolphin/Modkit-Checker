@@ -5,7 +5,7 @@ from collections import defaultdict
 import time
 
 # Change this to your root directory vehicle files are located.
-root_dir = r'ChangeThisToYourRootDirectory'
+root_dir = r'D:\Fivem Server\Blue-Box\txData\Qbox_B9A280.base\resources\[assets]'
 output_dir = 'reports'
 
 # Multiple patterns for sirens - some files might have different structures.
