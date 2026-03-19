@@ -1,63 +1,69 @@
 Yes this was made by AI, That i cant code for shit, dont complain that i dont care
 
-# Modkit, Siren, and Light ID Checker
+# Modkit Checker
 
-This Python script scans all `carcols.meta` files in your FiveM resource directory, extracts Modkit IDs, Siren IDs, and Light IDs, and lists them in a report. Duplicate Modkit IDs are shown at the top.
+This script scans FiveM vehicle meta files with `carcols` in the filename, extracts modkit IDs and siren IDs, and writes the results into separate report files.
 
-## Features
+## What the script does
 
-- Finds all Modkit IDs (`<Kits>...<id value="..."/>...`)
-- Finds all Siren IDs (`<Sirens>...<id value="..."/>...`)
-- Finds all Light IDs (`<Lights>...<id value="..."/>...`)
-- Lists duplicate Modkit IDs and their resource folders
-- Outputs results in `modkits_report.txt` in the format:  
-  Example:
-  ```
-  DUPLICATE MODKIT IDs:
-  ID 188: 4 times
-    gb_admiral
-    gb_neonct
-    gb_schlagenr
-    gb_schlagensp
+- Walks every subfolder under the configured `root_dir`
+- Only scans files whose name contains `carcols`
+- Extracts modkit IDs from `<Item><kitName>...</kitName><id value="..."/></Item>` entries
+- Extracts siren IDs from `<Sirens>` blocks and `CSirenSetting` nodes
+- Avoids mixing light IDs into the siren report
+- Detects files that contain multiple `<Kits>`, `<Sirens>`, or `<Lights>` blocks
+- Writes each report to its own file inside the `reports` folder
 
-  ALL MODKIT IDs:
-  ID 959: gb_811s2
-  ...
+## Output files
 
-  SIREN IDs:
-  ID 6808: gb_sultanrsxpol
-  ...
+When the script runs, it creates these files inside `reports`:
 
-  LIGHT IDs:
-  ID 96: gb_811s2
-  ...
-  ```
+- `duplicate_modkit_ids.txt`
+- `duplicate_siren_ids.txt`
+- `multiple_sets.txt`
+- `all_modkit_ids.txt`
+- `all_siren_ids.txt`
 
-## Dependencies
+## How folders are labeled
 
-- [Python 3.7 or newer](https://www.python.org/downloads/)
-- No external libraries required (uses only Python standard library)
+For each scanned file, the script uses the file's parent folder as the resource name.
+
+If the file is inside a `data` or `common` folder, it uses the folder above that instead.
+
+## Configuration
+
+Set the folder you want to scan by editing `root_dir` at the top of `check_modkits.py`.
+
+Example:
+
+```python
+root_dir = r'D:\Your\FiveM\Resources\Folder'
+```
+
+Reports are written to the folder set in `output_dir`:
+
+```python
+output_dir = 'reports'
+```
+
+## Requirements
+
+- Python 3.7 or newer
+- No external packages required
 
 ## Usage
 
-1. Place `check_modkits.py` in your main resource folder (e.g. `d:\Fivem Server\Blue-Box`)
-2. **To scan a different folder:**  
-   Edit the `root_dir` variable at the top of `check_modkits.py` and set it to your desired resource directory path.  
-   Example:  
-   ```python
-   root_dir = r"d:\Your\Custom\Resource\Folder"
-   ```
-3. Open a terminal in VS Code or Command Prompt.
-4. Run the script:
-   ```
-   python check_modkits.py
-   ```
-5. View the results in `modkits_report.txt` in the same folder.
+1. Open `check_modkits.py`
+2. Set `root_dir` to your FiveM resources folder
+3. Run the script:
 
-## Customization
+```bash
+python check_modkits.py
+```
 
-- Edit `root_dir` in the script if your resource folder is in a different location.
+4. Open the generated files in the `reports` folder
 
----
+## Notes
 
-If you have any issues or want to add features,
+- The script currently checks files with `carcols` in the filename, not every `.meta` file
+- `multiple_sets.txt` can still report repeated `<Lights>` blocks as a structure warning, even though light IDs are no longer extracted into reports
